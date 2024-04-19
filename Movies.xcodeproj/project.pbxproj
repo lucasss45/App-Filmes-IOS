@@ -23,6 +23,7 @@
 		2E2586E72BB5FA58006EF0BB /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2586E42BB5FA58006EF0BB /* FavoritesViewController.swift */; };
 		2E2586E82BB5FA58006EF0BB /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2586E52BB5FA58006EF0BB /* MovieListViewController.swift */; };
 		2E2586ED2BB5FA76006EF0BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E2586EB2BB5FA76006EF0BB /* Assets.xcassets */; };
+		59DAD0992BD1F8AE00F6ABBE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 59DAD0982BD1F8AE00F6ABBE /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		2E2586EA2BB5FA76006EF0BB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E2586EB2BB5FA76006EF0BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E54F4A82BB5F734007B6D93 /* Movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		59DAD0982BD1F8AE00F6ABBE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 		2E54F49F2BB5F734007B6D93 = {
 			isa = PBXGroup;
 			children = (
+				59DAD0982BD1F8AE00F6ABBE /* .gitignore */,
 				2E54F4AA2BB5F734007B6D93 /* Movies */,
 				2E54F4A92BB5F734007B6D93 /* Products */,
 			);
@@ -215,6 +218,7 @@
 				2E2586DD2BB5F9DB006EF0BB /* LaunchScreen.storyboard in Resources */,
 				2E2586ED2BB5FA76006EF0BB /* Assets.xcassets in Resources */,
 				2E2586DC2BB5F9DB006EF0BB /* Main.storyboard in Resources */,
+				59DAD0992BD1F8AE00F6ABBE /* .gitignore in Resources */,
 				2E2586DF2BB5F9DB006EF0BB /* MovieCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
