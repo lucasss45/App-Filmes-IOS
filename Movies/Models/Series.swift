@@ -1,8 +1,6 @@
 //
-//  Series.swift
-//  Movies
 //
-//  Created by ios-noite-03 on 23/04/24.
+//
 //
 
 import Foundation
