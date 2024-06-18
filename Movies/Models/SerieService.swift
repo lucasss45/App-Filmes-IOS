@@ -5,48 +5,45 @@
 //  Created by ios-noite-03 on 18/06/24.
 //
 
-
 import Foundation
 
-struct SeriesService {
+class SeriesService {
     
-    private let apiBaseURL = "https://www.omdbapi.com/?apikey="
-    private let apiToken = "fad9f001"
-    
-    private var apiURL: String {
-        apiBaseURL + apiToken
-    }
-    
-    private let decoder = JSONDecoder()
+    private let apiKey = "YOUR_API_KEY"
+    private let baseURL = "https://api.themoviedb.org/3"
     
     func searchSeries(withTitle title: String, completion: @escaping ([Series]) -> Void) {
-        let query = title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        let endpoint = apiURL + "&s=\(query)&type=series"
-        
-        guard let url = URL(string: endpoint) else {
+        guard let query = title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+              let url = URL(string: "\(baseURL)/search/tv?api_key=\(apiKey)&query=\(query)") else {
             completion([])
             return
         }
         
-        let request = URLRequest(url: url)
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data,
-                  error == nil else {
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
                 completion([])
                 return
             }
             
             do {
-                let seriesResponse = try decoder.decode(SeriesSearchResponse.self, from: data)
-                let series = seriesResponse.search
-                completion(series)
+                let response = try JSONDecoder().decode(SeriesResponse.self, from: data)
+                completion(response.results)
             } catch {
-                print("FETCH ALL SERIES ERROR: \(error)")
                 completion([])
             }
         }
-        
         task.resume()
     }
+    
+    func loadImageData(fromPath path: String, completion: @escaping (Data?) -> Void) {
+        let imageURL = URL(string: "https://image.tmdb.org/t/p/w500\(path)")!
+        let task = URLSession.shared.dataTask(with: imageURL) { data, response, error in
+            completion(data)
+        }
+        task.resume()
+    }
+}
+
+struct SeriesResponse: Decodable {
+    let results: [Series]
 }
