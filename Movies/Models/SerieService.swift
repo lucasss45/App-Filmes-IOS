@@ -9,12 +9,12 @@ import Foundation
 
 class SeriesService {
     
-    private let apiKey = "YOUR_API_KEY"
-    private let baseURL = "https://api.themoviedb.org/3"
+    private let apiKey = "YOUR_API_KEY" //inserir a chave
+    private let apibaseURL = "https://api.themoviedb.org/3" //acho que a key ta errada
     
     func searchSeries(withTitle title: String, completion: @escaping ([Series]) -> Void) {
         guard let query = title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-              let url = URL(string: "\(baseURL)/search/tv?api_key=\(apiKey)&query=\(query)") else {
+              let url = URL(string: "\(apibaseURL)/search/tv?api_key=\(apiKey)&query=\(query)") else {
             completion([])
             return
         }
