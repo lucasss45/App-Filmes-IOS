@@ -10,8 +10,6 @@ import UIKit
 class SerieDetailViewController: UIViewController {
     
     // Outlets
-    @IBOutlet weak var movieFavoriteButton: UIBarButtonItem!
-    
     @IBOutlet weak var serieTitleLabel: UILabel!
     @IBOutlet weak var serieImageView: UIImageView!
     @IBOutlet weak var serieGenreLabel: UILabel!
@@ -38,20 +36,19 @@ class SerieDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         serieTitleLabel.text = serieTitle
-        loadMovieData()
+        loadSerieData()
     }
     
-    private func loadMovieData() {
+    private func loadSerieData() {
         guard let serieId = serieId else { return }
         
         serieService.searchSeries(withId: serieId) {serie in
             
             self.serie = serie
-            
-            // Load movie image
+            // Load serie image
             if let posterURL = serie?.posterURL {
                 self.serieService.loadImageData(fromURL: posterURL) { imageData in
-                    self.updateMovieImage(withImageData: imageData)
+                    self.updateSerieImage(withImageData: imageData)
                 }
             }
             
@@ -62,36 +59,31 @@ class SerieDetailViewController: UIViewController {
     }
     
     private func updateViewData() {
-        movieGenreLabel.text = movie?.genre
-        movieCountryLabel.text = movie?.country
-        movieLanguageLabel.text = movie?.language
-        movieReleasedLabel.text = movie?.released
-        moviePlotLabel.text = movie?.plot
-        updateFavoriteButton()
+        serieTitleLabel.text = serie?.title
+        serieGenreLabel.text = serie?.genre
+        serieSeasonLabel.text = serie?.season
+        serieEpisodeLabel.text = serie?.episode
+        serieCountryLabel.text = serie?.country
+        serieReleasedLabel.text = serie?.released
+        serieLanguageLabel.text = serie?.language
     }
     
    
     
-    private func updateMovieImage(withImageData imageData: Data?) {
-        guard let imageData = imageData else { return }
-        
-        DispatchQueue.main.async {
-            let movieImage = UIImage(data: imageData)
-            self.movieImageView.image = movieImage
-        }
-    }
+
     
-  @IBAction func didTapFavoriteButton(_ sender: Any) {
-        guard let movie = movie else { return }
+  
+    
+@IBAction func didTapFavoriteButton(_ sender: Any) {
+        guard let serie = serie else { return }
         
-        if movie.isFavorite {
+        if serie.isFavorite {
             // Remove movie from favorite list
-            favoriteService.removeMovie(withId: movie.id)
+            favoriteService.removeSerie(withId: serie.id)
         } else {
             // Add movie to favorite list
-            favoriteService.addMovie(movie)
+            favoriteService.addMovie(serie)
         }
-        
         updateFavoriteButton()
     }
 }
