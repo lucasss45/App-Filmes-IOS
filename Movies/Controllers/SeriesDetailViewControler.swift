@@ -22,7 +22,6 @@ class SerieDetailViewController: UIViewController {
 
     
     // Services
-    let breakingBad = gerarBreakingBad()
     var serieService = SeriesService()
     var favoriteService = FavoriteService.shared
     
@@ -45,7 +44,8 @@ class SerieDetailViewController: UIViewController {
         serieService.searchSeries(withId: serieId) {serie in
             
             self.serie = serie
-            // Load serie image
+            
+            // Load movie image
             if let posterURL = serie?.posterURL {
                 self.serieService.loadImageData(fromURL: posterURL) { imageData in
                     self.updateSerieImage(withImageData: imageData)
@@ -58,7 +58,7 @@ class SerieDetailViewController: UIViewController {
         }
     }
     
-    private func updateViewData() {
+    func gerarBreakingBad() {
         serieTitleLabel.text = serie?.title
         serieGenreLabel.text = serie?.genre
         serieSeasonLabel.text = serie?.season
@@ -67,12 +67,25 @@ class SerieDetailViewController: UIViewController {
         serieReleasedLabel.text = serie?.released
         serieLanguageLabel.text = serie?.language
     }
-    
-   
-    
 
+    private func updateFavoriteButton() {
+        guard let serie = serie else { return }
+        
+        let isFavorite = favoriteService.isFavorite(serieId: serie.id)
+        self.serie?.isFavorite = isFavorite
+        let favoriteIcon = isFavorite ? "heart.fill" : "heart"
+        serieFavoriteButton.image = .init(systemName: favoriteIcon)
+    }
     
-  
+    private func updateSerieImage(withImageData imageData: Data?) {
+        guard let imageData = imageData else { return }
+        
+        DispatchQueue.main.async {
+            let serieImage = UIImage(data: imageData)
+            self.serieImageView.image = movieImage
+        }
+    }
+    
     
 @IBAction func didTapFavoriteButton(_ sender: Any) {
         guard let serie = serie else { return }
@@ -82,7 +95,7 @@ class SerieDetailViewController: UIViewController {
             favoriteService.removeSerie(withId: serie.id)
         } else {
             // Add movie to favorite list
-            favoriteService.addMovie(serie)
+            favoriteService.addSerie(serie)
         }
         updateFavoriteButton()
     }
