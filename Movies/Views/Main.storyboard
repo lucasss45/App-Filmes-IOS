@@ -367,6 +367,15 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gwf-ac-2Lo">
+                                <rect key="frame" x="113" y="396" width="107" height="104"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <segue destination="Lqt-B1-2ev" kind="show" id="EE9-g9-L5J"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uTL-6z-g2d"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -378,18 +387,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Séries" id="A31-qx-PBG"/>
-                    <connections>
-                        <segue destination="Lqt-B1-2ev" kind="show" identifier="showMovieDetailVC" id="ttM-Ao-i1r"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w5E-7Q-Ags" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131" y="1484"/>
+            <point key="canvasLocation" x="130.43478260869566" y="1483.9285714285713"/>
         </scene>
         <!--Serie Detail View Controller-->
         <scene sceneID="fuI-E4-hKr">
             <objects>
-                <viewController id="Lqt-B1-2ev" userLabel="Serie Detail View Controller" customClass="SerieDetailViewController" sceneMemberID="viewController">
+                <viewController id="Lqt-B1-2ev" userLabel="Serie Detail View Controller" customClass="SerieDetailViewController" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KCv-Tv-U9o">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -401,20 +407,8 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="465"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="UeF-OU-hVs">
-                                                <rect key="frame" x="30" y="380" width="41.5" height="52"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Plot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2f5-YE-khh">
-                                                        <rect key="frame" x="0.0" y="0.0" width="41.5" height="21.5"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="41k-3Y-NlD">
-                                                        <rect key="frame" x="0.0" y="31.5" width="41.5" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
+                                                <rect key="frame" x="30" y="380" width="34.5" height="21.5"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1eI-hr-trD">
                                                 <rect key="frame" x="8" y="-9" width="414" height="419"/>
@@ -588,6 +582,22 @@
                                                     <constraint firstAttribute="trailing" secondItem="6gK-gL-mJ4" secondAttribute="trailing" constant="16" id="fLE-GG-ZE5"/>
                                                 </constraints>
                                             </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vG1-Bz-bqO">
+                                                <rect key="frame" x="23" y="431" width="41.5" height="41"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Plot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Idh-br-I0J">
+                                                        <rect key="frame" x="0.0" y="0.0" width="41.5" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="41k-3Y-NlD">
+                                                        <rect key="frame" x="0.0" y="20.5" width="41.5" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="1eI-hr-trD" firstAttribute="top" secondItem="0GE-sL-qRS" secondAttribute="top" constant="-9" id="0kc-UF-1Ok"/>
@@ -619,22 +629,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="2gq-1T-cQs">
-                        <barButtonItem key="rightBarButtonItem" image="heart" catalog="system" style="done" id="0Sk-aW-2dK">
-                            <connections>
-                                <action selector="didTapFavoriteButton:" destination="Lqt-B1-2ev" id="46f-cC-2dJ"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="heart" catalog="system" style="done" id="0Sk-aW-2dK"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="serieCountryLabel" destination="JYi-PY-Znc" id="nOs-ei-Pmj"/>
-                        <outlet property="serieEpisodeLabel" destination="g3X-4w-mTC" id="CYs-19-9Gc"/>
-                        <outlet property="serieGenreLabel" destination="4Nr-3L-4j8" id="N0n-Ty-8ta"/>
-                        <outlet property="serieImageView" destination="Xk2-BH-8Wl" id="sC3-ks-c7Z"/>
-                        <outlet property="serieLanguageLabel" destination="kE4-ew-Zfe" id="add-is-IQK"/>
-                        <outlet property="seriePlotLabel" destination="41k-3Y-NlD" id="qgh-1h-eYM"/>
-                        <outlet property="serieReleasedLabel" destination="OYa-Ns-qge" id="tN1-YU-uWq"/>
-                        <outlet property="serieSeasonLabel" destination="Kku-7J-XrN" id="Pwg-cZ-0ne"/>
-                        <outlet property="serieTitleLabel" destination="OHV-BN-e7G" id="u1W-S9-cXG"/>
+                        <outlet property="serieCountryLabel" destination="JYi-PY-Znc" id="lYS-te-y63"/>
+                        <outlet property="serieEpisodeLabel" destination="g3X-4w-mTC" id="THv-39-VU1"/>
+                        <outlet property="serieGenreLabel" destination="4Nr-3L-4j8" id="jCm-dS-haa"/>
+                        <outlet property="serieImageView" destination="Xk2-BH-8Wl" id="hQr-5N-6u0"/>
+                        <outlet property="serieLanguageLabel" destination="kE4-ew-Zfe" id="vx3-7I-FiA"/>
+                        <outlet property="seriePlotLabel" destination="41k-3Y-NlD" id="VhP-wo-z5U"/>
+                        <outlet property="serieReleasedLabel" destination="OYa-Ns-qge" id="ABU-TD-T8v"/>
+                        <outlet property="serieSeasonLabel" destination="Kku-7J-XrN" id="KTR-KQ-V36"/>
+                        <outlet property="serieTitleLabel" destination="ObH-lw-Tp0" id="cm5-Ja-XtE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QQd-yy-VxO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

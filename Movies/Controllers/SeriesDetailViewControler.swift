@@ -7,9 +7,16 @@
 
 import UIKit
 
+class mytest: UIViewController{
+    
+    @IBOutlet weak var serieCountryLabel: UILabel!
+    
+}
+
 class SerieDetailViewController: UIViewController {
     
     // Outlets
+   
     @IBOutlet weak var serieTitleLabel: UILabel!
     @IBOutlet weak var serieImageView: UIImageView!
     @IBOutlet weak var serieGenreLabel: UILabel!
@@ -31,6 +38,17 @@ class SerieDetailViewController: UIViewController {
     var serieId: String?
     var serieTitle: String?
     private var serie: Series?
+    
+    override func viewDidLoad() {
+           super.viewDidLoad()
+           carregarDetalhesDaSerie()
+       }
+
+       private func carregarDetalhesDaSerie() {
+           guard serieId != nil else {
+               print("ID da série é nulo")
+               return
+           }
     
  //   override func viewWillAppear(_ animated: Bool) {
    //     super.viewWillAppear(animated)
@@ -71,13 +89,16 @@ class SerieDetailViewController: UIViewController {
   //  }
     
     func gerarBreakingBad() {
-        serieTitleLabel.text = serie?.title
-        serieGenreLabel.text = serie?.genre
-        serieSeasonLabel.text = serie?.season
-        serieEpisodeLabel.text = serie?.episode
-        serieCountryLabel.text = serie?.country
-        serieReleasedLabel.text = serie?.released
-        serieLanguageLabel.text = serie?.language
+       guard let serie = serie else {
+           return
+       }
+       serieTitleLabel.text = serie.title
+       serieGenreLabel.text = serie.genre
+       serieSeasonLabel.text = serie.season
+       serieEpisodeLabel.text = serie.episode
+       serieCountryLabel.text = serie.country
+       serieReleasedLabel.text = serie.released
+       serieLanguageLabel.text = serie.language
     }
 
     //favorite section
@@ -115,3 +136,5 @@ class SerieDetailViewController: UIViewController {
     //}
 //}
 }
+}
+
