@@ -7,43 +7,92 @@
 
 import Foundation
 
-class SeriesService {
     
-    private let apiKey = "YOUR_API_KEY" //inserir a chave
-    private let apibaseURL = "https://api.themoviedb.org/3" //acho que a key ta errada
+   
+struct SerieService {
+    
+    private let apiBaseURL = "https://www.omdbapi.com/?apikey="
+    private let apiToken = "fad9f001"
+    
+    private var apiURL: String {
+        apiBaseURL + apiToken
+    }
+    
+    private let decoder = JSONDecoder()
     
     func searchSeries(withTitle title: String, completion: @escaping ([Series]) -> Void) {
-        guard let query = title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-              let url = URL(string: "\(apibaseURL)/search/tv?api_key=\(apiKey)&query=\(query)") else {
+        let query = title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        let endpoint = apiURL + "&s=\(query)" + "&type=series"
+        
+        guard let url = URL(string: endpoint) else {
             completion([])
             return
         }
         
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data, error == nil else {
+        let request = URLRequest(url: url)
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data,
+                    error == nil else {
                 completion([])
                 return
             }
             
             do {
-                let response = try JSONDecoder().decode(SeriesResponse.self, from: data)
-                completion(response.results)
+                let serieResponse = try decoder.decode(SeriesSearchResponse.self, from: data)
+                let series = serieResponse.search
+                completion(series)
             } catch {
+                print("FETCH ALL MOVIES ERROR: \(error)")
                 completion([])
             }
         }
+        
         task.resume()
     }
     
-    func loadImageData(fromPath path: String, completion: @escaping (Data?) -> Void) {
-        let imageURL = URL(string: "https://image.tmdb.org/t/p/w500\(path)")!
-        let task = URLSession.shared.dataTask(with: imageURL) { data, response, error in
+    func searchSerie(withId serieId: String, completion: @escaping (Series?) -> Void) {
+        let query = serieId.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        let endpoint = apiURL + "&i=\(query)"
+        
+        guard let url = URL(string: endpoint) else {
+            completion(nil)
+            return
+        }
+        
+        let request = URLRequest(url: url)
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data else {
+                completion(nil)
+                return
+            }
+            
+            do {
+                let serie = try decoder.decode(Series.self, from: data)
+                completion(serie)
+            } catch {
+                print("FETCH MOVIE ERROR: \(error)")
+                completion(nil)
+            }
+        }
+        
+        task.resume()
+    }
+    
+    func loadImageData(fromURL link: String, completion: @escaping (Data?) -> Void) {
+        guard let url = URL(string: link) else {
+            completion(nil)
+            return
+        }
+        
+        let request = URLRequest(url: url)
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
             completion(data)
         }
+        
         task.resume()
     }
 }
 
-struct SeriesResponse: Decodable {
-    let results: [Series]
-}

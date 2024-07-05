@@ -13,11 +13,14 @@ class SeriesListViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var seriesService = SeriesService()
+    var seriesService = SerieService()
     var series: [Series] = []
     
     private let searchController = UISearchController()
     private let itemsPerRow: CGFloat = 2
+    private let spaceBetweenItems = 6.0
+    private let itemAspectRatio = 1.5
+    private let marginSize = 32.0
     private let sectionInsets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
     
     override func viewDidLoad() {
@@ -37,12 +40,14 @@ class SeriesListViewController: UIViewController {
     private func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(SeriesCollectionViewCell.self, forCellWithReuseIdentifier: SeriesCollectionViewCell.identifier)
+        // Register the nib file for the collection view cell
+      
     }
     
     private func searchSeries(withTitle title: String) {
         seriesService.searchSeries(withTitle: title) { [weak self] series in
             DispatchQueue.main.async {
+                print(series)
                 self?.series = series
                 self?.collectionView.reloadData()
             }
@@ -73,7 +78,7 @@ extension SeriesListViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         let series = series[indexPath.row]
-        cell.configure(with: series)
+        cell.setup(series: series)
         return cell
     }
 }
@@ -81,19 +86,18 @@ extension SeriesListViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension SeriesListViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-        let availableWidth = view.frame.width - paddingSpace
-        let widthPerItem = availableWidth / itemsPerRow
-        return CGSize(width: widthPerItem, height: widthPerItem * 1.5)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return sectionInsets
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return sectionInsets.left
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
+        let collectionWidth = collectionView.frame.size.width - marginSize
+        let availableWidth = collectionWidth - (spaceBetweenItems * itemsPerRow)
+        
+        let itemWidth = availableWidth / itemsPerRow
+        let itemHeight = itemWidth * itemAspectRatio
+        
+        return .init(width: itemWidth, height: itemHeight)
     }
 }
 

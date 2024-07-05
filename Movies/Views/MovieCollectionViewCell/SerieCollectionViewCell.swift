@@ -17,7 +17,7 @@ class SeriesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var seriesImageView: UIImageView!
     @IBOutlet weak var seriesTitleLabel: UILabel!
     
-    private let seriesService = SeriesService()
+    private let seriesService = SerieService()
     
     func setup(series: Series) {
         seriesImageView.layer.masksToBounds = true
@@ -31,13 +31,13 @@ class SeriesCollectionViewCell: UICollectionViewCell {
         
         // Load series poster from URL
         if let posterPath = series.posterURL {
-            seriesService.loadImageData(fromPath: posterPath) { imageData in
+            seriesService.loadImageData(fromURL: posterPath) { imageData in
                 self.updateCell(withImageData: imageData, orTitle: series.title)
             }
         }
     }
     
-    private func updateCell(withImageData imageData: Data?, orTitle title: String) {
+    func updateCell(withImageData imageData: Data?, orTitle title: String) {
         DispatchQueue.main.async {
             if let imageData = imageData {
                 // Show series image
@@ -56,3 +56,5 @@ class SeriesCollectionViewCell: UICollectionViewCell {
         seriesTitleLabel.text = nil
     }
 }
+
+
