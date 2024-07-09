@@ -2,11 +2,12 @@
 //  SerieService.swift
 //  Movies
 //
+
 //  Created by ios-noite-03 on 18/06/24.
+
 //
 
 import Foundation
-
     
    
 struct SerieService {
@@ -67,6 +68,7 @@ struct SerieService {
                 completion(nil)
                 return
             }
+
             
             do {
                 let serie = try decoder.decode(Series.self, from: data)
