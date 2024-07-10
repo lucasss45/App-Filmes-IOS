@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="movieTableCell" id="SSb-oh-4YX" customClass="MovieTableViewCell" customModule="Movies" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SSb-oh-4YX" id="SqP-kt-auU">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="fillEqually" spacing="4" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0np-34-OfP">
+                        <rect key="frame" x="217.5" y="4" width="50" height="48"/>
+                    </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQ9-L3-1wc">
+                        <rect key="frame" x="283.5" y="16" width="20.5" height="24"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" image="heart.fill" catalog="system"/>
+                        <connections>
+                            <action selector="didTapFavoriteButton:" destination="SSb-oh-4YX" eventType="touchUpInside" id="9sA-Ws-T7G"/>
+                        </connections>
+                    </button>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V0H-Dv-8An">
+                        <rect key="frame" x="16" y="3" width="50" height="50"/>
+                        <color key="backgroundColor" name="AccentColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="HWp-Bd-FON"/>
+                            <constraint firstAttribute="width" constant="1" id="gqh-Od-KMZ"/>
+                            <constraint firstAttribute="width" secondItem="V0H-Dv-8An" secondAttribute="height" multiplier="172:285" id="zcl-pz-CZC"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D0U-pR-SVB">
+                        <rect key="frame" x="74" y="23" width="195.5" height="29"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8k-2u-I3h">
+                        <rect key="frame" x="74" y="4" width="195.5" height="29"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="V0H-Dv-8An" firstAttribute="width" secondItem="V0H-Dv-8An" secondAttribute="height" multiplier="172:285" id="A9w-Ur-hE9"/>
+                    <constraint firstItem="0np-34-OfP" firstAttribute="top" secondItem="SqP-kt-auU" secondAttribute="top" constant="4" id="ZL8-pt-9NS"/>
+                    <constraint firstItem="CQ9-L3-1wc" firstAttribute="leading" secondItem="0np-34-OfP" secondAttribute="trailing" constant="16" id="aWi-uo-U6J"/>
+                    <constraint firstItem="CQ9-L3-1wc" firstAttribute="top" secondItem="SqP-kt-auU" secondAttribute="top" constant="16" id="n1o-6e-bBf"/>
+                    <constraint firstAttribute="trailing" secondItem="CQ9-L3-1wc" secondAttribute="trailing" constant="16" id="qfR-af-fvs"/>
+                    <constraint firstAttribute="bottom" secondItem="CQ9-L3-1wc" secondAttribute="bottom" constant="16" id="ug7-13-nQu"/>
+                    <constraint firstAttribute="bottom" secondItem="0np-34-OfP" secondAttribute="bottom" constant="4" id="x6I-DW-ZSB"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="VHF-cZ-Pwk"/>
+            <point key="canvasLocation" x="128.98550724637681" y="-12.723214285714285"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="heart.fill" catalog="system" width="128" height="109"/>
+        <namedColor name="AccentColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

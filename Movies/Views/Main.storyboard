@@ -632,6 +632,7 @@
                         <barButtonItem key="rightBarButtonItem" image="heart" catalog="system" style="done" id="0Sk-aW-2dK"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="FavoriteButton" destination="0Sk-aW-2dK" id="K2L-vs-yFy"/>
                         <outlet property="serieCountryLabel" destination="JYi-PY-Znc" id="lYS-te-y63"/>
                         <outlet property="serieEpisodeLabel" destination="g3X-4w-mTC" id="THv-39-VU1"/>
                         <outlet property="serieGenreLabel" destination="4Nr-3L-4j8" id="jCm-dS-haa"/>

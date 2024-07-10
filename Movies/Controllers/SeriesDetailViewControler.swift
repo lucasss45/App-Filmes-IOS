@@ -7,16 +7,11 @@
 
 import UIKit
 
-class mytest: UIViewController{
-    
-    @IBOutlet weak var serieCountryLabel: UILabel!
-    
-}
-
 class SerieDetailViewController: UIViewController {
     
     // Outlets
    
+    @IBOutlet weak var FavoriteButton: UIBarButtonItem!
     @IBOutlet weak var serieTitleLabel: UILabel!
     @IBOutlet weak var serieImageView: UIImageView!
     @IBOutlet weak var serieGenreLabel: UILabel!
@@ -39,102 +34,78 @@ class SerieDetailViewController: UIViewController {
     var serieTitle: String?
     private var serie: Series?
     
-    override func viewDidLoad() {
-           super.viewDidLoad()
-           carregarDetalhesDaSerie()
-       }
-
-       private func carregarDetalhesDaSerie() {
-           guard serieId != nil else {
-               print("ID da série é nulo")
-               return
-           }
     
- //   override func viewWillAppear(_ animated: Bool) {
-   //     super.viewWillAppear(animated)
-    //    serieTitleLabel.text = serieTitle
-    //    loadSerieData()
-  //  }
-    
-  //  private func loadSerieData() {
-     //   guard let serieId = serieId else { return }
-     
-       // serieService.searchSeries(withId: serieId) {serie in
-            
-           // self.serie = serie
-            
-            // Load serie image
-        //    if let posterURL = serie?.posterURL {
-          //      self.serieService.loadImageData(fromURL: posterURL) { imageData in
-           //         self.updateSerieImage(withImageData: imageData)
-         //       }
-         //   }
-            
-         //   DispatchQueue.main.async {
-           //     self.updateViewData()
-        //    }
-       // }
-   // }
-    
- //   private func updateViewData() {
-      //  serieTitleLabel.text = serie?.title
-      //  serieGenreLabel.text = serie?.genre
-      //  serieSeasonLabel.text = serie?.season
-      //  serieEpisodeLabel.text = serie?.episode
-      //  serieCountryLabel.text = serie?.country
-     //   serieLanguageLabel.text = serie?.language
-     //   serieReleasedLabel.text = serie?.released
-     //   seriePlotLabel.text = serie?.plot
-    //    updateFavoriteButton()
-  //  }
-    
-    func gerarBreakingBad() {
-       guard let serie = serie else {
-           return
-       }
-       serieTitleLabel.text = serie.title
-       serieGenreLabel.text = serie.genre
-       serieSeasonLabel.text = serie.season
-       serieEpisodeLabel.text = serie.episode
-       serieCountryLabel.text = serie.country
-       serieReleasedLabel.text = serie.released
-       serieLanguageLabel.text = serie.language
+    override func viewWillAppear(_ animated: Bool) {
+       super.viewWillAppear(animated)
+        serieTitleLabel.text = serieTitle
+        loadSerieData()
     }
+    
+    private func loadSerieData() {
+        guard let serieId = serieId else { return }
+     
+        serieService.searchSeries(withId: serieId) {serie in
+            
+            self.serie = serie
+            
+            //Load; serie; image
+            if let posterURL = serie?.posterURL {
+                self.serieService.loadImageData(fromURL: posterURL) { imageData in
+                    self.updateSerieImage(withImageData: imageData)
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self.updateViewData()
+            }
+        }
+    }
+    
+    private func updateViewData() {
+        serieTitleLabel.text = serie?.title
+        serieGenreLabel.text = serie?.genre
+        serieSeasonLabel.text = serie?.season
+        serieEpisodeLabel.text = serie?.episode
+        serieCountryLabel.text = serie?.country
+        serieLanguageLabel.text = serie?.language
+        serieReleasedLabel.text = serie?.released
+        seriePlotLabel.text = serie?.plot
+        updateFavoriteButton()
+  }
+    
 
     //favorite section
     
-  //  private func updateFavoriteButton() {
-      //  guard let serie = serie else { return }
+    private func updateFavoriteButton() {
+        guard let serie = serie else { return }
         
-    //    let isFavorite = favoriteService.isFavorite(serieId: serie.id)
-     //   self.serie?.isFavorite = isFavorite
-      //  let favoriteIcon = isFavorite ? "heart.fill" : "heart"
-     //   serieFavoriteButton.image = .init(systemName: favoriteIcon)
-   // }
+        let isFavorite = favoriteService.isFavorite(serieId: serie.id)
+       self.serie?.isFavorite = isFavorite
+        let favoriteIcon = isFavorite ? "heart.fill" : "heart"
+        FavoriteButton.image = .init(systemName: favoriteIcon)
+    }
     
-  //  private func updateSerieImage(withImageData imageData: Data?) {
-     //   guard let imageData = imageData else { return }
+    private func updateSerieImage(withImageData imageData: Data?) {
+       guard let imageData = imageData else { return }
         
-      //  DispatchQueue.main.async {
-         //   let serieImage = UIImage(data: imageData)
-         //   self.serieImageView.image = serieImage
-        //}
-    //}
+        DispatchQueue.main.async {
+           let serieImage = UIImage(data: imageData)
+            self.serieImageView.image = serieImage
+        }
+    }
     
     
-//@IBAction func didTapFavoriteButton(_ sender: Any) {
-       // guard let serie = serie else { return }
-        //
-        //if serie.isFavorite {
-            // Remove movie from favorite list
-     //       favoriteService.removeSerie(withId: serie.id)
-       // } else {
-            // Add movie to favorite list
-           // favoriteService.addSerie(serie)
-       // }
-       // updateFavoriteButton()
-    //}
-//}
-}
+           func didTapFavoriteButton(_ sender: Any) {
+       guard let serie = serie else { return }
+        
+        if serie.isFavorite {
+            //Remove movie from favorite list
+            favoriteService.removeSerie(withId: serie.id)
+        } else {
+             //Add movie to favorite list
+           favoriteService.addSerie(serie)
+        }
+        updateFavoriteButton()
+    }
 }
 
