@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
-
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -23,7 +22,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="sU0-xK-Dfh" kind="relationship" relationship="viewControllers" id="45B-VR-Yyo"/>
-                        <segue destination="j19-gJ-S5e" kind="relationship" relationship="viewControllers" id="cMD-i6-dEg"/>
                         <segue destination="TyP-9f-uOZ" kind="relationship" relationship="viewControllers" id="ric-Ay-uXd"/>
                     </connections>
                 </tabBarController>
