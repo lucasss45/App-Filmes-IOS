@@ -2,8 +2,10 @@
 //  SerieSearchResponse.swift
 //  Movies
 //
-//  Created by lucas vizeu on 30/04/24.
+//  Created by ios-noite-03 on 18/06/24.
 //
+
+//Criar a Resposta de Busca para Séries
 
 import Foundation
 

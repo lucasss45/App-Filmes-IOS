@@ -9,8 +9,8 @@ struct Series: Decodable, Equatable {
     let id: String
     let title: String
     let genre: String?
-    let season: Int
-    let episode: Int
+    let season: Int?
+    let episode: Int?
     let released: String?
     let language: String?
     let country: String?
