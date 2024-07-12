@@ -384,27 +384,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="SY2-I8-Xrr">
-                                <rect key="frame" x="0.0" y="140" width="414" height="673"/>
+                                <rect key="frame" x="0.0" y="220" width="414" height="593"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N1w-FN-AGn">
+                                <rect key="frame" x="161" y="159" width="93" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Ordenar" buttonSize="large">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" name="AccentColor"/>
+                                    </backgroundConfiguration>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wfM-sb-uq6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="wfM-sb-uq6" firstAttribute="bottom" secondItem="SY2-I8-Xrr" secondAttribute="bottom" id="5dc-pn-819"/>
-                            <constraint firstItem="SY2-I8-Xrr" firstAttribute="top" secondItem="wfM-sb-uq6" secondAttribute="top" id="RBf-7E-JWe"/>
                             <constraint firstItem="wfM-sb-uq6" firstAttribute="trailing" secondItem="SY2-I8-Xrr" secondAttribute="trailing" id="UGM-fg-2U2"/>
                             <constraint firstItem="SY2-I8-Xrr" firstAttribute="leading" secondItem="wfM-sb-uq6" secondAttribute="leading" id="Ufb-OT-u0t"/>
+                            <constraint firstItem="SY2-I8-Xrr" firstAttribute="top" secondItem="wfM-sb-uq6" secondAttribute="top" constant="80" id="XfV-FZ-EB4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Favoritos" id="T6k-P9-VGS"/>
                     <connections>
+                        <outlet property="ordenarbtn" destination="N1w-FN-AGn" id="Ghh-K1-Lef"/>
                         <outlet property="tableView" destination="SY2-I8-Xrr" id="lh7-3k-gMk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MOz-pm-66f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1400" y="1517"/>
+            <point key="canvasLocation" x="1398.5507246376812" y="1516.7410714285713"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eud-2N-9ck">

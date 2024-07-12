@@ -9,7 +9,7 @@ import UIKit
 
 class FavoritesViewController: UIViewController {
     
-    // Outlets
+    @IBOutlet weak var ordenarbtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
     // Services
