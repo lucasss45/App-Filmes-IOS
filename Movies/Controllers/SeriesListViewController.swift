@@ -12,9 +12,19 @@ import UIKit
 class SeriesListViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    private let emptyStateLabel: UILabel = {
+            let label = UILabel()
+            label.text = "Nenhum resultado encontrado"
+            label.textAlignment = .center
+            label.isHidden = true
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.font = UIFont.systemFont(ofSize: 24)
+            return label
+        }()
     
     var seriesService = SerieService()
     var series: [Series] = []
+    private let defaultSearchName = ""
     
     private let searchController = UISearchController()
     private let itemsPerRow: CGFloat = 2
@@ -26,7 +36,9 @@ class SeriesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSearchController()
+        setupEmptyStateLabel()
         setupCollectionView()
+        searchSeries(withTitle: defaultSearchName)
     }
     
     private func setupSearchController() {
@@ -37,6 +49,14 @@ class SeriesListViewController: UIViewController {
         definesPresentationContext = true
     }
     
+    private func setupEmptyStateLabel() {
+            view.addSubview(emptyStateLabel)
+            NSLayoutConstraint.activate([
+                emptyStateLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                emptyStateLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            ])
+        }
+    
     private func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -45,14 +65,31 @@ class SeriesListViewController: UIViewController {
     }
     
     private func searchSeries(withTitle title: String) {
-        seriesService.searchSeries(withTitle: title) { [weak self] series in
-            DispatchQueue.main.async {
-                print(series)
-                self?.series = series
-                self?.collectionView.reloadData()
+        if title.isEmpty {
+            series.removeAll()
+            collectionView.reloadData()
+            updateEmptyStateLabel(withMessage: "Busque uma série")
+        } else {
+            seriesService.searchSeries(withTitle: title) { [weak self] series in
+                DispatchQueue.main.async {
+                    print(series)
+                    self?.series = series
+                    self?.updateEmptyStateLabel()
+                    self?.collectionView.reloadData()
+                }
             }
         }
     }
+    
+    private func updateEmptyStateLabel(withMessage message: String? = nil) {
+            if let message = message {
+                emptyStateLabel.text = message
+                emptyStateLabel.isHidden = false
+            } else {
+                emptyStateLabel.text = "Nenhum resultado encontrado"
+                emptyStateLabel.isHidden = !series.isEmpty
+            }
+        }
 }
 
 // MARK: - UISearchResultsUpdating
