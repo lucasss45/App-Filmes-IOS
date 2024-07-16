@@ -23,6 +23,8 @@
 		2E2586E72BB5FA58006EF0BB /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2586E42BB5FA58006EF0BB /* FavoritesViewController.swift */; };
 		2E2586E82BB5FA58006EF0BB /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2586E52BB5FA58006EF0BB /* MovieListViewController.swift */; };
 		2E2586ED2BB5FA76006EF0BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E2586EB2BB5FA76006EF0BB /* Assets.xcassets */; };
+		53BB18FE2C45F13E0074FDC4 /* SerieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BB18FD2C45F13E0074FDC4 /* SerieCollectionViewCell.swift */; };
+		53BB19002C45F14A0074FDC4 /* SeriesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BB18FF2C45F14A0074FDC4 /* SeriesListViewController.swift */; };
 		59CCB77C2BE1C19D006FF09E /* Series.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CCB77B2BE1C19D006FF09E /* Series.swift */; };
 		59CCB7802BE1C1FB006FF09E /* SeriesMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CCB77F2BE1C1FB006FF09E /* SeriesMock.swift */; };
 		59CCB7822BE1C8E3006FF09E /* SerieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CCB7812BE1C8E3006FF09E /* SerieService.swift */; };
@@ -48,6 +50,8 @@
 		2E2586EA2BB5FA76006EF0BB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E2586EB2BB5FA76006EF0BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E54F4A82BB5F734007B6D93 /* Movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		53BB18FD2C45F13E0074FDC4 /* SerieCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SerieCollectionViewCell.swift; sourceTree = "<group>"; };
+		53BB18FF2C45F14A0074FDC4 /* SeriesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesListViewController.swift; sourceTree = "<group>"; };
 		59CCB77B2BE1C19D006FF09E /* Series.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Series.swift; sourceTree = "<group>"; };
 		59CCB77F2BE1C1FB006FF09E /* SeriesMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeriesMock.swift; sourceTree = "<group>"; };
 		59CCB7812BE1C8E3006FF09E /* SerieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerieService.swift; sourceTree = "<group>"; };
@@ -105,6 +109,7 @@
 			children = (
 				2E2586D72BB5F9DB006EF0BB /* MovieCollectionViewCell.swift */,
 				2E2586D82BB5F9DB006EF0BB /* MovieCollectionViewCell.xib */,
+				53BB18FD2C45F13E0074FDC4 /* SerieCollectionViewCell.swift */,
 			);
 			path = MovieCollectionViewCell;
 			sourceTree = "<group>";
@@ -124,6 +129,7 @@
 				2E2586E42BB5FA58006EF0BB /* FavoritesViewController.swift */,
 				2E2586E32BB5FA58006EF0BB /* MovieDetailViewController.swift */,
 				2E2586E52BB5FA58006EF0BB /* MovieListViewController.swift */,
+				53BB18FF2C45F14A0074FDC4 /* SeriesListViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -253,10 +259,12 @@
 				2E2586D02BB5F9A2006EF0BB /* Movie.swift in Sources */,
 				2E2586DE2BB5F9DB006EF0BB /* MovieCollectionViewCell.swift in Sources */,
 				2E2586C92BB5F984006EF0BB /* SceneDelegate.swift in Sources */,
+				53BB18FE2C45F13E0074FDC4 /* SerieCollectionViewCell.swift in Sources */,
 				59CCB7842BE1C95C006FF09E /* SerieSearchResponse.swift in Sources */,
 				59CCB77C2BE1C19D006FF09E /* Series.swift in Sources */,
 				2E2586E12BB5F9DB006EF0BB /* MovieTableViewCell.swift in Sources */,
 				2E2586E82BB5FA58006EF0BB /* MovieListViewController.swift in Sources */,
+				53BB19002C45F14A0074FDC4 /* SeriesListViewController.swift in Sources */,
 				59CCB7802BE1C1FB006FF09E /* SeriesMock.swift in Sources */,
 				2E2586E62BB5FA58006EF0BB /* MovieDetailViewController.swift in Sources */,
 				2E2586E72BB5FA58006EF0BB /* FavoritesViewController.swift in Sources */,
