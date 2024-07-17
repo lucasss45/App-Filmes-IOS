@@ -13,7 +13,7 @@ class SerieFavoritesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     // Services
-    var favoriteService = FavoriteService.shared
+    var serieFavoriteService = SerieFavoriteService.shared
     
     // Search
     private let searchController = UISearchController()
@@ -26,14 +26,14 @@ class SerieFavoritesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        serie = favoriteService.listAll()
+        serie = serieFavoriteService.listAll()
         tableView.reloadData()
     }
     
     private func setupViewController() {
         setupSearchController()
         setupTableView()
-        serie = favoriteService.listAll()
+        serie = serieFavoriteService.listAll()
     }
     
     private func setupSearchController() {
@@ -73,8 +73,8 @@ extension SerieFavoritesViewController: UITableViewDataSource {
 
 extension SerieFavoritesViewController: SerieTableViewCellDelegate {
     func didTapFavoriteButton(forSerie serie: Series) {
-        serie.removeAll(where: { $0 == serie })
-        favoriteService.removeSerie(withId: serie.id)
+        self.serie.removeAll(where: { $0 == serie })
+        serieFavoriteService.removeSerie(withId: serie.id)
         tableView.reloadData()
     }
 }
@@ -86,7 +86,7 @@ extension SerieFavoritesViewController: UISearchResultsUpdating {
         let searchText = searchController.searchBar.text ?? ""
         
         if searchText.isEmpty {
-            serie = favoriteService.listAll()
+            serie = serieFavoriteService.listAll()
         } else {
             serie = filteredSerie(byTitle: searchText)
         }
@@ -95,7 +95,7 @@ extension SerieFavoritesViewController: UISearchResultsUpdating {
     }
     
     private func filteredSerie(byTitle serieTitle: String) -> [Series] {
-        favoriteService.listAll().filter({ serie in
+        serieFavoriteService.listAll().filter({ serie in
             serie.title.contains(serieTitle)
         })
     }

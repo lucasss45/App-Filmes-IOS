@@ -17,8 +17,11 @@ class SerieTableViewCell: UITableViewCell {
     weak var delegate: SerieTableViewCellDelegate?
     
     // Outlets
- 
-    private let movieService = MovieService()
+    @IBOutlet weak var serieImageView: UIImageView!
+    @IBOutlet weak var serieTitleLabel: UILabel!
+    @IBOutlet weak var serieGenreLabel: UILabel!
+    
+    private let serieService = SeriesService()
     
     // Data
     private var serie: Series?
@@ -35,7 +38,7 @@ class SerieTableViewCell: UITableViewCell {
         
         // Load serie poster from URL
         if let posterURL = serie.posterURL {
-            SeriesService.loadImageData(fromURL: posterURL) { imageData in
+            serieService.loadImageData(fromURL: posterURL) { imageData in
                 DispatchQueue.main.async {
                     let serieImage = UIImage(data: imageData ?? Data())
                     self.serieImageView.image = serieImage

@@ -25,7 +25,7 @@ class SerieDetailViewController: UIViewController {
     
     // Services
     var serieService = SeriesService()
-    var favoriteService = FavoriteService.shared
+    var serieFavoriteService = SerieFavoriteService.shared
     
     
     
@@ -79,7 +79,7 @@ class SerieDetailViewController: UIViewController {
     private func updateFavoriteButton() {
         guard let serie = serie else { return }
         
-        let isFavorite = favoriteService.isFavorite(serieId: serie.id)
+        let isFavorite = serieFavoriteService.isFavorite(serieId: serie.id)
        self.serie?.isFavorite = isFavorite
         let favoriteIcon = isFavorite ? "heart.fill" : "heart"
         FavoriteButton.image = .init(systemName: favoriteIcon)
@@ -100,10 +100,10 @@ class SerieDetailViewController: UIViewController {
         
         if serie.isFavorite {
             //Remove movie from favorite list
-            favoriteService.removeSerie(withId: serie.id)
+            serieFavoriteService.removeSerie(withId: serie.id)
         } else {
              //Add movie to favorite list
-           favoriteService.addSerie(serie)
+           serieFavoriteService.addSeries(serie)
         }
         updateFavoriteButton()
     }
