@@ -65,7 +65,11 @@ class SeriesListViewController: UIViewController {
     }
     
     private func searchSeries(withTitle title: String) {
-        if title.isEmpty {
+        if !InternetConnectionMonitor.shared.isConnected {
+            series.removeAll()
+            collectionView.reloadData()
+            updateEmptyStateLabel(withMessage: "Problema de conexão")
+        } else if title.isEmpty {
             series.removeAll()
             collectionView.reloadData()
             updateEmptyStateLabel(withMessage: "Busque uma série")
