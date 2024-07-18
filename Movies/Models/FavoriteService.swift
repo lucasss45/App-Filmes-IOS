@@ -36,3 +36,33 @@ class FavoriteService {
         }
     }
 }
+class SerieFavoriteService {
+    
+    // Singleton instance
+    static let shared = SerieFavoriteService()
+    private init() {}
+    
+    // In memory da
+    private var favoriteSeries: [Series] = []
+    
+    func listAll() -> [Series] {
+        favoriteSeries
+    }
+    
+    func isFavorite(serieId: String) -> Bool {
+        favoriteSeries.contains { serie in
+            serie.id == serieId
+        }
+    }
+    
+    func addSeries(_ serie: Series) {
+        favoriteSeries.append(serie)
+    }
+    
+    func removeSerie(withId serieId: String) {
+        favoriteSeries.removeAll { serie in
+            serie.id == serieId
+        }
+    }
+}
+
