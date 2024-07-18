@@ -11,13 +11,22 @@ class MovieListViewController: UIViewController {
 
     // Outlets
     @IBOutlet weak var collectionView: UICollectionView!
+    private let emptyStateLabel: UILabel = {
+            let label = UILabel()
+            label.text = "Nenhum resultado encontrado"
+            label.textAlignment = .center
+            label.isHidden = true
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.font = UIFont.systemFont(ofSize: 24)
+            return label
+        }()
     
     // Services
     var movieService = MovieService()
     
-    // Search
+        	// Search
     private let searchController = UISearchController()
-    private let defaultSearchName = "Steve Jobs"
+    private let defaultSearchName = ""
     private var movies: [Movie] = []
     private let segueIdentifier = "showMovieDetailVC"
     
@@ -30,6 +39,7 @@ class MovieListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewController()
+        setupEmptyStateLabel()
         loadMovies(withTitle: defaultSearchName)
     }
     
@@ -38,14 +48,44 @@ class MovieListViewController: UIViewController {
         setupCollectionView()
     }
     
+    private func setupEmptyStateLabel() {
+            view.addSubview(emptyStateLabel)
+            NSLayoutConstraint.activate([
+                emptyStateLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                emptyStateLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            ])
+        }
+    
     private func loadMovies(withTitle movieTitle: String) {
-        movieService.searchMovies(withTitle: movieTitle) { movies in
-            DispatchQueue.main.async {
-                self.movies = movies
-                self.collectionView.reloadData()
+            if !InternetConnectionMonitor.shared.isConnected {
+                movies.removeAll()
+                collectionView.reloadData()
+                updateEmptyStateLabel(withMessage: "Problema de conexão")
+            }
+            else if movieTitle.isEmpty {
+                movies.removeAll()
+                collectionView.reloadData()
+                updateEmptyStateLabel(withMessage: "Busque um filme")
+            } else {
+                movieService.searchMovies(withTitle: movieTitle) { movies in
+                    DispatchQueue.main.async {
+                        self.movies = movies
+                        self.updateEmptyStateLabel()
+                        self.collectionView.reloadData()
+                    }
+                }
             }
         }
-    }
+    
+    private func updateEmptyStateLabel(withMessage message: String? = nil) {
+            if let message = message {
+                emptyStateLabel.text = message
+                emptyStateLabel.isHidden = false
+            } else {
+                emptyStateLabel.text = "Nenhum resultado encontrado"
+                emptyStateLabel.isHidden = !movies.isEmpty
+            }
+        }
     
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
@@ -122,12 +162,6 @@ extension MovieListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchText = searchController.searchBar.text ?? ""
         
-        if searchText.isEmpty {
-            loadMovies(withTitle: defaultSearchName)
-        } else {
-            loadMovies(withTitle: searchText)
-        }
-        
-        collectionView.reloadData()
+        loadMovies(withTitle: searchText)
     }
 }

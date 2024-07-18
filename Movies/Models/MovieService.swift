@@ -41,7 +41,7 @@ struct MovieService {
                 let movies = movieResponse.search
                 completion(movies)
             } catch {
-                print("FETCH ALL MOVIES ERROR: \(error)")
+//                print("FETCH ALL MOVIES ERROR: \(error)")
                 completion([])
             }
         }

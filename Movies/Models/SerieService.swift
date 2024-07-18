@@ -2,94 +2,100 @@
 //  SerieService.swift
 //  Movies
 //
-//  Created by ios-noite-03 on 30/04/24.
+
+//  Created by ios-noite-03 on 18/06/24.
+
 //
 
 import Foundation
-
-struct SeriesService {
-
+    
+   
+struct SerieService {
+    
     private let apiBaseURL = "https://www.omdbapi.com/?apikey="
-    private let apiToken = ""
-
+    private let apiToken = "fad9f001"
+    
     private var apiURL: String {
         apiBaseURL + apiToken
     }
-
+    
     private let decoder = JSONDecoder()
-
+    
     func searchSeries(withTitle title: String, completion: @escaping ([Series]) -> Void) {
         let query = title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        let endpoint = apiURL + "&s=\(query)&type=series" // Adicionando o parâmetro '&type=series' para buscar apenas séries
-
+        let endpoint = apiURL + "&s=\(query)" + "&type=series"
+        
         guard let url = URL(string: endpoint) else {
             completion([])
             return
         }
-
+        
         let request = URLRequest(url: url)
-
+        
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data,
-                  error == nil else {
+                    error == nil else {
                 completion([])
                 return
             }
-
+            
             do {
-                let seriesResponse = try decoder.decode(SeriesSearchResponse.self, from: data)
-                let series = seriesResponse.search
+                let serieResponse = try decoder.decode(SeriesSearchResponse.self, from: data)
+                let series = serieResponse.search
+//                print(series)
                 completion(series)
             } catch {
-                print("FETCH ALL SERIES ERROR: \(error)")
+//                print("FETCH ALL MOVIES ERROR: \(error)")
                 completion([])
             }
         }
-
+        
         task.resume()
     }
-
-    func searchSeries(withId seriesId: String, completion: @escaping (Series?) -> Void) {
-        let query = seriesId.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        let endpoint = apiURL + "&i=\(query)&type=series" // Adicionando o parâmetro '&type=series' para buscar apenas séries
-
+    
+    func searchSerie(withId serieId: String, completion: @escaping (Series?) -> Void) {
+        let query = serieId.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        let endpoint = apiURL + "&i=\(query)"
+        
         guard let url = URL(string: endpoint) else {
             completion(nil)
             return
         }
-
+        
         let request = URLRequest(url: url)
-
+        
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
                 completion(nil)
                 return
             }
 
+            
             do {
-                let series = try decoder.decode(Series.self, from: data)
-                completion(series)
+                let serie = try decoder.decode(Series.self, from: data)
+                completion(serie)
             } catch {
-                print("FETCH SERIES ERROR: \(error)")
+//                print("FETCH MOVIE ERROR: \(error)")
                 completion(nil)
             }
         }
-
+        
         task.resume()
     }
-
+    
     func loadImageData(fromURL link: String, completion: @escaping (Data?) -> Void) {
         guard let url = URL(string: link) else {
             completion(nil)
             return
         }
-
+        
         let request = URLRequest(url: url)
-
+        
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             completion(data)
         }
-
+        
         task.resume()
     }
 }
+

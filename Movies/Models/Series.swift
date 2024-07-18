@@ -11,6 +11,7 @@ struct Series: Decodable, Equatable {
     let genre: String?
     let season: String
     let episode: String
+
     let released: String?
     let language: String?
     let country: String?
