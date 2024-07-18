@@ -57,7 +57,12 @@ class MovieListViewController: UIViewController {
         }
     
     private func loadMovies(withTitle movieTitle: String) {
-            if movieTitle.isEmpty {
+            if !InternetConnectionMonitor.shared.isConnected {
+                movies.removeAll()
+                collectionView.reloadData()
+                updateEmptyStateLabel(withMessage: "Problema de conexão")
+            }
+            else if movieTitle.isEmpty {
                 movies.removeAll()
                 collectionView.reloadData()
                 updateEmptyStateLabel(withMessage: "Busque um filme")

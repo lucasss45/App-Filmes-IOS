@@ -42,9 +42,10 @@ struct SerieService {
             do {
                 let serieResponse = try decoder.decode(SeriesSearchResponse.self, from: data)
                 let series = serieResponse.search
+//                print(series)
                 completion(series)
             } catch {
-                print("FETCH ALL MOVIES ERROR: \(error)")
+//                print("FETCH ALL MOVIES ERROR: \(error)")
                 completion([])
             }
         }
@@ -74,7 +75,7 @@ struct SerieService {
                 let serie = try decoder.decode(Series.self, from: data)
                 completion(serie)
             } catch {
-                print("FETCH MOVIE ERROR: \(error)")
+//                print("FETCH MOVIE ERROR: \(error)")
                 completion(nil)
             }
         }
