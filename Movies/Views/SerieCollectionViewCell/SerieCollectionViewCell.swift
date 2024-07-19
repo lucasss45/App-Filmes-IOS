@@ -2,54 +2,59 @@
 //  SerieCollectionViewCell.swift
 //  Movies
 //
-//  Created by ios-noite-13 on 25/06/24.
+//  Created by ios-noite-03 on 18/06/24.
+//
+
+import Foundation
 
 import UIKit
 
-class SerieCollectionViewCell: UICollectionViewCell {
+class SeriesCollectionViewCell: UICollectionViewCell {
     
-    static let identifier = "serieCollectionCell"
-
+    static let identifier = "seriesCollectionCell"
+    
     // Outlets
-    @IBOutlet weak var serieImageView: UIImageView!
-    @IBOutlet weak var serieTitleLabel: UILabel!
-
-    private let serieService = SeriesService()
+    @IBOutlet weak var seriesImageView: UIImageView!
+    @IBOutlet weak var seriesTitleLabel: UILabel!
     
-    func setup(serie : Series) {
-        serieImageView.layer.masksToBounds = true
-        serieImageView.layer.cornerRadius = 8
-        serieImageView.layer.borderWidth = 1
-        serieImageView.layer.borderColor = UIColor.black.cgColor
+    private let seriesService = SerieService()
+    
+    func setup(series: Series) {
+        seriesImageView.layer.masksToBounds = true
+        seriesImageView.layer.cornerRadius = 8
+        seriesImageView.layer.borderWidth = 1
+        seriesImageView.layer.borderColor = UIColor.black.cgColor
         
         // Clean data
-        serieImageView.image = nil
-        serieTitleLabel.text = nil
+        seriesImageView.image = nil
+        seriesTitleLabel.text = nil
         
-        // Load movie poster from URL
-        if let posterURL = serie.posterURL {
-            serieService.loadImageData(fromURL: posterURL) { imageData in
-                self.updateCell(withImageData: imageData, orTitle: serie.title)
+        // Load series poster from URL
+        if let posterPath = series.posterURL {
+            seriesService.loadImageData(fromURL: posterPath) { imageData in
+                self.updateCell(withImageData: imageData, orTitle: series.title)
             }
         }
     }
     
-    private func updateCell(withImageData imageData: Data?, orTitle title: String) {
+    func updateCell(withImageData imageData: Data?, orTitle title: String) {
         DispatchQueue.main.async {
             if let imageData = imageData {
-                // Show movie image
-                let serieImage = UIImage(data: imageData)
-                self.serieImageView.image = serieImage
+                // Show series image
+                let seriesImage = UIImage(data: imageData)
+                self.seriesImageView.image = seriesImage
             } else {
-                // Show movie title if poster is not available
-                self.serieTitleLabel.text = title
+                // Show series title if poster is not available
+                self.seriesTitleLabel.text = title
             }
         }
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        serieImageView.image = nil
-        serieTitleLabel.text = nil
+        seriesImageView.image = nil
+        seriesTitleLabel.text = nil
     }
 }
+
+

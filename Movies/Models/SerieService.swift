@@ -42,7 +42,6 @@ struct SerieService {
             do {
                 let serieResponse = try decoder.decode(SeriesSearchResponse.self, from: data)
                 let series = serieResponse.search
-//                print(series)
                 completion(series)
             } catch {
 //                print("FETCH ALL MOVIES ERROR: \(error)")
@@ -55,7 +54,7 @@ struct SerieService {
     
     func searchSerie(withId serieId: String, completion: @escaping (Series?) -> Void) {
         let query = serieId.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        let endpoint = apiURL + "&i=\(query)"
+        let endpoint = apiURL + "&i=\(query)"  + "&type=series"
         
         guard let url = URL(string: endpoint) else {
             completion(nil)

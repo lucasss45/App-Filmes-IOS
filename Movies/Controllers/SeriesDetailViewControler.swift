@@ -24,7 +24,7 @@ class SerieDetailViewController: UIViewController {
 
     
     // Services
-    var serieService = SeriesService()
+    var serieService = SerieService()
     var serieFavoriteService = SerieFavoriteService.shared
     
     
@@ -44,7 +44,7 @@ class SerieDetailViewController: UIViewController {
     private func loadSerieData() {
         guard let serieId = serieId else { return }
      
-        serieService.searchSeries(withId: serieId) {serie in
+        serieService.searchSerie(withId: serieId) {serie in
             
             self.serie = serie
             

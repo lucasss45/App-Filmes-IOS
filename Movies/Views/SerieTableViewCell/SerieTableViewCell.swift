@@ -21,7 +21,7 @@ class SerieTableViewCell: UITableViewCell {
     @IBOutlet weak var serieTitleLabel: UILabel!
     @IBOutlet weak var serieGenreLabel: UILabel!
     
-    private let serieService = SeriesService()
+    private let serieService = SerieService()
     
     // Data
     private var serie: Series?
