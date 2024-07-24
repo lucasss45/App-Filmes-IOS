@@ -70,7 +70,7 @@ struct MovieService {
                 let movie = try decoder.decode(Movie.self, from: data)
                 completion(movie)
             } catch {
-                print("FETCH MOVIE ERROR: \(error)")
+//                print("FETCH MOVIE ERROR: \(error)")
                 completion(nil)
             }
         }

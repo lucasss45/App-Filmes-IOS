@@ -65,12 +65,22 @@ class SeriesListViewController: UIViewController {
       
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let serieDetailVC = segue.destination as? SerieDetailViewController,
+              let serie = sender as? Series else {
+            return
+        }
+        
+        serieDetailVC.serieId = serie.id
+        serieDetailVC.serieTitle = serie.title
+    }
+    
     private func searchSeries(withTitle title: String) {
-//        if !InternetConnectionMonitor.shared.isConnected {
-//            series.removeAll()
-//            collectionView.reloadData()
-//            updateEmptyStateLabel(withMessage: "Problema de conexão")
-//        } else
+        if !InternetConnectionMonitor.shared.isConnected {
+            series.removeAll()
+            collectionView.reloadData()
+            updateEmptyStateLabel(withMessage: "Problema de conexão")
+        } else
         if title.isEmpty {
             series.removeAll()
             collectionView.reloadData()
@@ -79,7 +89,6 @@ class SeriesListViewController: UIViewController {
             seriesService.searchSeries(withTitle: title) { [weak self] series in
                 DispatchQueue.main.async {
                     self?.series = series
-                    print(series)
                     self?.updateEmptyStateLabel()
                     self?.collectionView.reloadData()
                 }
@@ -102,9 +111,9 @@ class SeriesListViewController: UIViewController {
 
 extension SeriesListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-//        guard let searchText = searchController.searchBar.text, !searchText.isEmpty else {
+//       guard let searchText = searchController.searchBar.text, !searchText.isEmpty else {
 //            return
-//        }
+//       }
         
         let searchText = searchController.searchBar.text ?? ""
         searchSeries(withTitle: searchText)
