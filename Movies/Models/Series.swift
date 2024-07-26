@@ -9,8 +9,8 @@ struct Series: Decodable, Equatable {
     let id: String
     let title: String
     let genre: String?
-    let season: String?
-    let episode: String?
+    let totalSeasons: String?
+    let runtime: String?
     let released: String?
     let language: String?
     let country: String?
@@ -22,8 +22,8 @@ struct Series: Decodable, Equatable {
     enum CodingKeys: String, CodingKey {
         case id = "imdbID"
         case title = "Title"
-        case season = "Season"
-        case episode = "Episode"
+        case totalSeasons = "Seasons"
+        case runtime = "Duration"
         case released = "Released"
         case language = "Language"
         case country = "Country"

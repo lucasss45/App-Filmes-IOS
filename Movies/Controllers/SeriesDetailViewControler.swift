@@ -64,8 +64,6 @@ class SerieDetailViewController: UIViewController {
     private func updateViewData() {
         serieTitleLabel.text = serie?.title
         serieGenreLabel.text = serie?.genre
-        serieSeasonLabel.text = serie?.season
-        serieEpisodeLabel.text = serie?.episode
         serieCountryLabel.text = serie?.country
         serieLanguageLabel.text = serie?.language
         serieReleasedLabel.text = serie?.released

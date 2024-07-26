@@ -19,6 +19,7 @@ class MovieTableViewCell: UITableViewCell {
     // Outlets
     @IBOutlet weak var movieTitleLabel: UILabel!
     @IBOutlet weak var movieGenreLabel: UILabel!
+    @IBOutlet weak var movieIdLabel: UILabel!
     @IBOutlet weak var movieImageView: UIImageView!
     
     private let movieService = MovieService()
@@ -30,6 +31,7 @@ class MovieTableViewCell: UITableViewCell {
     func setup(favorite: Favorite) {
         self.favorite = favorite
         movieTitleLabel.text = favorite.title
+        movieIdLabel.text = favorite.id
         movieGenreLabel.text = favorite.genre ?? "Não definido"
         
         movieImageView.layer.masksToBounds = true
