@@ -36,6 +36,7 @@ class FavoriteService {
         }
     }
 }
+
 class SerieFavoriteService {
     
     // Singleton instance

@@ -95,17 +95,17 @@ class SerieDetailViewController: UIViewController {
     }
     
     
-           func didTapFavoriteButton(_ sender: Any) {
-       guard let serie = serie else { return }
-        
-        if serie.isFavorite {
-            //Remove movie from favorite list
-            serieFavoriteService.removeSerie(withId: serie.id)
-        } else {
-             //Add movie to favorite list
-           serieFavoriteService.addSeries(serie)
-        }
-        updateFavoriteButton()
+    @IBAction func didTapFavoriteButton(_ sender: Any) {
+        guard let serie = serie else { return }
+         
+         if serie.isFavorite {
+             //Remove movie from favorite list
+             serieFavoriteService.removeSerie(withId: serie.id)
+         } else {
+              //Add movie to favorite list
+            serieFavoriteService.addSeries(serie)
+         }
+         updateFavoriteButton()
     }
 }
 

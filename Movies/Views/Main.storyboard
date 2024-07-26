@@ -664,7 +664,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="2gq-1T-cQs">
-                        <barButtonItem key="rightBarButtonItem" image="heart" catalog="system" style="done" id="0Sk-aW-2dK"/>
+                        <barButtonItem key="rightBarButtonItem" image="heart" catalog="system" style="done" id="0Sk-aW-2dK">
+                            <connections>
+                                <action selector="didTapFavoriteButton:" destination="Lqt-B1-2ev" id="LDC-eZ-Rem"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="FavoriteButton" destination="0Sk-aW-2dK" id="K2L-vs-yFy"/>
