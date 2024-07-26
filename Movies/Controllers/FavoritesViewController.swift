@@ -14,10 +14,13 @@ class FavoritesViewController: UIViewController {
     
     // Services
     var favoriteService = FavoriteService.shared
+    var serieFavoriteService = SerieFavoriteService.shared
     
     // Search
     private let searchController = UISearchController()
     private var movies: [Movie] = []
+    private var series: [Series] = []
+    private var favorites: [Favorite] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +30,15 @@ class FavoritesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         movies = favoriteService.listAll()
+        series = serieFavoriteService.listAll()
+        favorites = movies.map { Favorite(id: $0.id, title: $0.title, genre: $0.genre, posterURL: $0.posterURL, type: .movie) } + series.map { Favorite(id: $0.id, title: $0.title, genre: $0.genre, posterURL: $0.posterURL, type: .serie) }
         tableView.reloadData()
     }
     
     private func setupViewController() {
         setupSearchController()
         setupTableView()
-        movies = favoriteService.listAll()
+        
     }
     
     private func setupSearchController() {
@@ -53,7 +58,7 @@ class FavoritesViewController: UIViewController {
 
 extension FavoritesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        movies.count
+        favorites.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -61,10 +66,10 @@ extension FavoritesViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let movie = movies[indexPath.row]
+        let favorite = favorites[indexPath.row]
         
         cell.delegate = self
-        cell.setup(movie: movie)
+        cell.setup(favorite: favorite)
         return cell
     }
 }
@@ -72,9 +77,14 @@ extension FavoritesViewController: UITableViewDataSource {
 // MARK: - MovieTableViewCellDelegate
 
 extension FavoritesViewController: MovieTableViewCellDelegate {
-    func didTapFavoriteButton(forMovie movie: Movie) {
-        movies.removeAll(where: { $0 == movie })
-        favoriteService.removeMovie(withId: movie.id)
+    func didTapFavoriteButton(forFavorite favorite: Favorite) {
+        favorites.removeAll(where: { $0 == favorite })
+        switch favorite.type {
+        case .movie:
+            favoriteService.removeMovie(withId: favorite.id)
+        case .serie:
+            serieFavoriteService.removeSerie(withId: favorite.id)
+        }
         tableView.reloadData()
     }
 }

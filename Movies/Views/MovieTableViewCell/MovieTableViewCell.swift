@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MovieTableViewCellDelegate: AnyObject {
-    func didTapFavoriteButton(forMovie movie: Movie)
+    func didTapFavoriteButton(forFavorite favorite: Favorite)
 }
 
 class MovieTableViewCell: UITableViewCell {
@@ -19,17 +19,20 @@ class MovieTableViewCell: UITableViewCell {
     // Outlets
     @IBOutlet weak var movieTitleLabel: UILabel!
     @IBOutlet weak var movieGenreLabel: UILabel!
+    @IBOutlet weak var movieIdLabel: UILabel!
     @IBOutlet weak var movieImageView: UIImageView!
     
     private let movieService = MovieService()
+    private let serieService = SerieService()
     
     // Data
-    private var movie: Movie?
+    private var favorite: Favorite?
     
-    func setup(movie: Movie) {
-        self.movie = movie
-        movieTitleLabel.text = movie.title
-        movieGenreLabel.text = movie.genre ?? "Não definido"
+    func setup(favorite: Favorite) {
+        self.favorite = favorite
+        movieTitleLabel.text = favorite.title
+        movieIdLabel.text = favorite.id
+        movieGenreLabel.text = favorite.genre ?? "Não definido"
         
         movieImageView.layer.masksToBounds = true
         movieImageView.layer.cornerRadius = 4
@@ -37,18 +40,28 @@ class MovieTableViewCell: UITableViewCell {
         movieImageView.layer.borderColor = UIColor.black.cgColor
         
         // Load movie poster from URL
-        if let posterURL = movie.posterURL {
-            movieService.loadImageData(fromURL: posterURL) { imageData in
-                DispatchQueue.main.async {
-                    let movieImage = UIImage(data: imageData ?? Data())
-                    self.movieImageView.image = movieImage
+        if let posterURL = favorite.posterURL {
+            switch favorite.type {
+            case .movie:
+                movieService.loadImageData(fromURL: posterURL) { imageData in
+                    DispatchQueue.main.async {
+                        let movieImage = UIImage(data: imageData ?? Data())
+                        self.movieImageView.image = movieImage
+                    }
+                }
+            case .serie:
+                serieService.loadImageData(fromURL: posterURL) { imageData in
+                    DispatchQueue.main.async {
+                        let serieImage = UIImage(data: imageData ?? Data())
+                        self.movieImageView.image = serieImage
+                    }
                 }
             }
         }
     }
     
     @IBAction func didTapFavoriteButton(_ sender: Any) {
-        guard let movie = movie else { return }
-        delegate?.didTapFavoriteButton(forMovie: movie)
+        guard let favorite = favorite else { return }
+        delegate?.didTapFavoriteButton(forFavorite: favorite)
     }
 }

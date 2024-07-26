@@ -19,11 +19,11 @@ class InternetConnectionMonitor {
         monitor = NWPathMonitor()
         monitor.pathUpdateHandler = { [weak self] path in
             self?.isConnected = path.status == .satisfied
-            if self?.isConnected == true {
-                print("Conectado à internet.")
-            } else {
-                print("Desconectado da internet.")
-            }
+//            if self?.isConnected == true {
+//                print("Conectado à internet.")
+//            } else {
+//                print("Desconectado da internet.")
+//            }
         }
         monitor.start(queue: queue)
     }

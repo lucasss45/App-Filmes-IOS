@@ -25,6 +25,7 @@ class SeriesListViewController: UIViewController {
     var seriesService = SerieService()
     var series: [Series] = []
     private let defaultSearchName = ""
+    private let segueIdentifier = "showSerieDetailVC"
     
     private let searchController = UISearchController()
     private let itemsPerRow: CGFloat = 2
@@ -64,19 +65,29 @@ class SeriesListViewController: UIViewController {
       
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let serieDetailVC = segue.destination as? SerieDetailViewController,
+              let serie = sender as? Series else {
+            return
+        }
+        
+        serieDetailVC.serieId = serie.id
+        serieDetailVC.serieTitle = serie.title
+    }
+    
     private func searchSeries(withTitle title: String) {
         if !InternetConnectionMonitor.shared.isConnected {
             series.removeAll()
             collectionView.reloadData()
             updateEmptyStateLabel(withMessage: "Problema de conexão")
-        } else if title.isEmpty {
+        } else
+        if title.isEmpty {
             series.removeAll()
             collectionView.reloadData()
             updateEmptyStateLabel(withMessage: "Busque uma série")
         } else {
             seriesService.searchSeries(withTitle: title) { [weak self] series in
                 DispatchQueue.main.async {
-                    print(series)
                     self?.series = series
                     self?.updateEmptyStateLabel()
                     self?.collectionView.reloadData()
@@ -100,9 +111,11 @@ class SeriesListViewController: UIViewController {
 
 extension SeriesListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        guard let searchText = searchController.searchBar.text, !searchText.isEmpty else {
-            return
-        }
+//       guard let searchText = searchController.searchBar.text, !searchText.isEmpty else {
+//            return
+//       }
+        
+        let searchText = searchController.searchBar.text ?? ""
         searchSeries(withTitle: searchText)
     }
 }
@@ -146,6 +159,7 @@ extension SeriesListViewController: UICollectionViewDelegateFlowLayout {
 
 extension SeriesListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Handle selection
+        let selectedSerie = series[indexPath.row]
+        performSegue(withIdentifier: segueIdentifier, sender: selectedSerie)
     }
 }
