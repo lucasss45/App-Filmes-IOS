@@ -20,7 +20,7 @@ struct MovieService {
     
     func searchMovies(withTitle title: String, completion: @escaping ([Movie]) -> Void) {
         let query = title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        let endpoint = apiURL + "&s=\(query)"
+        let endpoint = apiURL + "&s=\(query)" + "&type=movie"
         
         guard let url = URL(string: endpoint) else {
             completion([])
